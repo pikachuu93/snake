@@ -9,14 +9,13 @@ class SnakeInterface
     private $term;
     private $snakes;
 
-    private $debug = TRUE;
-
-    public $serverSocket = FALSE;
-
-    private $frameLength = 100000;
+    private $debug         = TRUE;
+    public $serverSocket   = FALSE;
+    private $frameLength   = 100000;
+    private $currentColour = 0;
 
     private static $titleFile = "title.txt";
-    private static $title    = "Daniely Snake";
+    private static $title     = "Daniely Snake";
 
     public function __construct($sockets)
     {
@@ -29,7 +28,7 @@ class SnakeInterface
 
         foreach ($sockets as $socket)
         {
-            $colour = each(Term::$bgc);
+            $colour = Term::$bgc[$this->currentColour++ % count(Term::$bgc)];
             $this->snakes[] = new Snake($this->term, $colour["value"], $socket);
         }
     }
