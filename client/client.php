@@ -11,8 +11,18 @@ class Client extends Term
 {
     private $socket;
 
-    function __construct($host = "localhost", $port = 314159)
+    function __construct($host = NULL, $port = NULL)
     {
+        if ($host === NULL)
+        {
+            $host = "localhost";
+        }
+
+        if ($port === NULL)
+        {
+            $port = 314159;
+        }
+
         parent::__construct();
         $this->connect($host, $port);
     }
@@ -80,6 +90,6 @@ class Client extends Term
     }
 }
 
-$c = new Client();
+$c = new Client($argv[1] ?? NULL, $argv[2] ?? NULL);
 $c->run();
 ?>
