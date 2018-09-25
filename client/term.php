@@ -44,7 +44,7 @@ class Term
         system("stty sane");
     }
 
-    public function cursorTo($x, $y)
+    public function cursorTo(int $x, int $y)
     {
         if ($x > $this->x)
             $x = $this->x;
