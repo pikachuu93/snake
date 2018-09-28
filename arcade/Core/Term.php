@@ -1,4 +1,7 @@
 <?php
+
+namespace Core;
+
 class Term
 {
     const MODE_HALFWIDTH = 0;
@@ -10,13 +13,14 @@ class Term
 
     private static $in;
 
-    public static $bgc = array("red"    => "\033[41m", 
-                               "green"  => "\033[42m",
-                               "yellow" => "\033[43m",
-                               "blue"   => "\033[44m",
-                               "pink"   => "\033[45m",
-                               "cyan"   => "\033[46m",
-                               "grey"   => "\033[47m");
+    const BACKGROUND_RED    = "\033[41m"; 
+    const BACKGROUND_GREEN  = "\033[42m";
+    const BACKGROUND_YELLOW = "\033[43m";
+    const BACKGROUND_BLUE   = "\033[44m";
+    const BACKGROUND_PINK   = "\033[45m";
+    const BACKGROUND_CYAN   = "\033[46m";
+    const BACKGROUND_GREY   = "\033[47m";
+    const CLEAR             = "\033[0m";
 
     public function __construct($x = FALSE, $y = FALSE)
     {
