@@ -42,15 +42,15 @@ class Ghost extends Character implements \Core\Renderable
            . $this->colour . "  " . Term::CLEAR;
     }
 
-    public function move($pacManPos, Map $map)
+    public function move(PacMan $pacMan, Map $map)
     {
         $current = $map->getCell($this->getPosition());
 
         if ($current->isDecision())
         {
             $dir = $this->ai->getDecision(
-                $pacManPos, 
-                $this->getPosition(),
+                $pacMan,
+                $this,
                 $map
             );
 

@@ -21,7 +21,7 @@ class Engine extends \Core\GameEngine
 
         $this->pacmanTimer = (new Timer(0.4, true))
             ->setCallback([$this, "updatePacman"]);
-        $this->ghostsTimer = (new Timer(0.3, true))
+        $this->ghostsTimer = (new Timer(0.5, true))
             ->setCallback([$this, "updateGhosts"]);
     }
 
@@ -35,6 +35,15 @@ class Engine extends \Core\GameEngine
 
     public function updatePacman()
     {
+        $nextPos = $this->pacman->getNextDesiredPosition();
+        if ($result = $this->map->checkPosition($nextPos))
+        {
+            $this->pacman->setPosition($result);
+            $this->pacman->setDirection($this->pacman->getDesiredDirection());
+
+            return;
+        }
+
         $nextPos = $this->pacman->getNextPosition();
         if ($result = $this->map->checkPosition($nextPos))
         {
@@ -45,7 +54,7 @@ class Engine extends \Core\GameEngine
     private function updateGhost($ghost)
     {
         $pos = $this->pacman->getPosition();
-        $ghost->move($pos, $this->map);
+        $ghost->move($this->pacman, $this->map);
     }
 
     public function updateGhosts()
@@ -94,7 +103,7 @@ class Engine extends \Core\GameEngine
             return;
         }
 
-        $this->pacman->setDirection($dir);
+        $this->pacman->setDesiredDirection($dir);
     }
 
     protected function getRunRate() : int
